@@ -16,7 +16,7 @@ public class SmarthomeNetworkCommunication {
 
 		URL obj = new URL(changeState);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		// optional default is GET
+		// optional default is GET 
 		con.setRequestMethod("GET");
 		con.setConnectTimeout(5000);
 		int responseCode = con.getResponseCode();
