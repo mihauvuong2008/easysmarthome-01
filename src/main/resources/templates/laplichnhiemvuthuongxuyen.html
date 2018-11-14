@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+
+	<div class="page-title">Lập thời khóa biểu</div>
+	<div class="demo-container">
+		<select style="margin: 0 0 10px 0;">
+			<option th:each="nhiemvu_thuongxuyen : ${Nhiemvu_thuongxuyens}"
+				th:value="${nhiemvu_thuongxuyen.Id_Nhiemvu_thuongxuyen}"
+				th:utext="${nhiemvu_thuongxuyen.TenNhiemvuthuongxuyen}" />
+		</select> <label>Từ ngày: </label> <input type="date" name="bday" id="myDate1" />
+		<label style="margin: 0 0 0 20px;">Đến ngày: </label><input
+			type="date" name="bday" id="myDate2" />
+
+		<table id="table" style="margin: 10px 0 10px 0;">
+			<tbody>
+				<tr>
+					<th>Thứ 2</th>
+					<td>
+						<table class="subtasktable" id="tableT2">
+							<tbody>
+								<tr>
+									<td><input type="time"></td>
+									<td><input class="addrow" type="button" value="Thêm"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<th>Thứ 3</th>
+					<td>
+						<table class="subtasktable" id="tableT3">
+							<tbody>
+								<tr>
+									<td><input type="time"></td>
+									<td><input class="addrow" type="button" value="Thêm"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<th>Thứ 4</th>
+					<td>
+						<table class="subtasktable" id="tableT4">
+							<tbody>
+								<tr>
+									<td><input type="time"></td>
+									<td><input class="addrow" type="button" value="Thêm"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<th>Thứ 5</th>
+					<td>
+						<table class="subtasktable" id="tableT5">
+							<tbody>
+								<tr>
+									<td><input type="time"></td>
+									<td><input class="addrow" type="button" value="Thêm"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<th>Thứ 6</th>
+					<td>
+						<table class="subtasktable" id="tableT6">
+							<tbody>
+								<tr>
+									<td><input type="time"></td>
+									<td><input class="addrow" type="button" value="Thêm"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<th>Thứ 7</th>
+					<td>
+						<table class="subtasktable" id="tableT7">
+							<tbody>
+								<tr>
+									<td><input type="time"></td>
+									<td><input class="addrow" type="button" value="Thêm"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<th>Chủ nhật</th>
+					<td>
+						<table class="subtasktable" id="tableCN">
+							<tbody>
+								<tr>
+									<td><input type="time"></td>
+									<td><input class="addrow" type="button" value="Thêm"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<input class="label-for-check" type="submit" value="Xong" />
+	</div>
+	<div id="fullloaded_content" style="width: 100%;"></div>
+	<script>
+		function delRow(elem) {
+			var row = elem.parentNode.parentNode;
+			row.parentNode.removeChild(row);
+		}
+		jQuery(".addrow")
+				.click(
+						function() {
+							var tableRef = jQuery(this).parent().parent()
+									.parent();
+							//var tableRef = this.parentElement.parentElement.parentElement;
+
+							tableRef
+									.after('<tr> <td><input type="time" ></td> <td><input class="remrow" type="button" value="Xóa" onclick="delRow(this)" style="width:100%; background: red;"></td> </tr>');
+
+							// Insert a row in the table at the last row: tableRef.rows.length
+							//var newRow = tableRef[0].insertRow(0);
+
+							// Insert a cell in the row at index 0
+							//var newCell = newRow.insertCell(0);
+
+							// Append a text node to the cell
+							//var newText = document.createTextNode('New row');
+							//newCell.appendChild(newText);
+						});
+		function getParamFromTable(tableId) {
+			var myTab = document.getElementById(tableId);
+			var T2par = "";
+			// LOOP THROUGH EACH ROW OF THE TABLE AFTER HEADER.
+			for (i = 0; i < myTab.rows.length; i++) {
+
+				// GET THE CELLS COLLECTION OF THE CURRENT ROW.
+				var objCells = myTab.rows.item(i).cells;
+				var time_ = objCells.item(0);
+				//var time_ = objCells.item(0).childNodes[0];
+				T2par = T2par + time_.childNodes[0].value + "_"
+			}
+			return T2par;
+		}
+		$(document)
+				.ready(
+						function() {
+							document.getElementById("myDate1").valueAsDate = new Date();
+							document.getElementById("myDate2").valueAsDate = new Date();
+							jQuery(".remrow").click(function() {
+								var row = jQuery(this).parent();
+								row.remove();
+							});
+
+							$('.label-for-check')
+									.click(
+											function(event) {
+												var T2param = getParamFromTable('tableT2');
+												var T3param = getParamFromTable('tableT3');
+												var T4param = getParamFromTable('tableT4');
+												var T5param = getParamFromTable('tableT5');
+												var T6param = getParamFromTable('tableT6');
+												var T7param = getParamFromTable('tableT7');
+												var CNparam = getParamFromTable('tableCN');
+												lastLinkaccess = "/admin/laplichnhiemvuthuongxuyen?dateFrom="
+														+ document
+																.getElementById("myDate1").value
+														+ "&dateTo="
+														+ document
+																.getElementById("myDate2").value
+														+ "&t2="
+														+ T2param
+														+ "&t3="
+														+ T3param
+														+ "&t4="
+														+ T4param
+														+ "&t5="
+														+ T5param
+														+ "&t6="
+														+ T6param
+														+ "&t7="
+														+ T7param
+														+ "&cn=" + CNparam
+												alert(lastLinkaccess);
+												$('#fullloaded_content').load(
+														lastLinkaccess);
+												return false;
+											});
+						});
+	</script>
+</body>
+</html>

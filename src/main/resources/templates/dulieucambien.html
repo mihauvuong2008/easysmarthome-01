@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Dữ liệu thu thập</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+
+	<div class="page-title">Dữ liệu cảm biến thu thập</div>
+	<div class="lichsu-container">
+		<table id="table">
+			<thead>
+				<tr>
+					<th>Id Cảm biến</th>
+					<th>Loại Cảm biến</th>
+					<th>Vị trí</th>
+					<th>Địa chỉ IP</th>
+					<th>Ngày giờ kích hoạt</th>
+					<th>Giá trị</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					th:each="dulieucambienInfo : ${paginationDulieucambienInfo.list}">
+					<td th:text="${dulieucambienInfo.id_Cambien}"></td>
+					<td th:text="${dulieucambienInfo.Loaicambien}"></td>
+					<td th:text="${dulieucambienInfo.Vitri}"></td>
+					<td th:text="${dulieucambienInfo.Id_Arduinocontroller}"></td>
+					<td th:text="${dulieucambienInfo.Ngaygiokichhoat}"></td>
+					<td th:text="${dulieucambienInfo.Giatri}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<div class="page-navigator"
+		th:if="${paginationDulieucambienInfo.totalPages > 1}">
+		<th:block
+			th:each="page : ${paginationDulieucambienInfo.navigationPages}">
+
+			<a th:href="@{|/admin/lichsucambien?page=${page}|}"
+				th:if="${page != -1}" class="nav-item" th:utext="${page}"></a>
+			<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+		</th:block>
+	</div>
+	<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>

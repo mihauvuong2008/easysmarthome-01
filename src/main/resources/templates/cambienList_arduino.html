@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách cảm biến</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+
+	<table id="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Tên</th>
+				<th>Vị trí</th>
+				<th>Loại cảm biến</th>
+				<th>Xem nhật ký</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="cambienInfo : ${paginationCambien.list}">
+				<td th:text="${cambienInfo.Id_Cambien}"></td>
+				<td th:text="${cambienInfo.Tencambien}"></td>
+				<td th:text="${cambienInfo.Id_Vitri}"></td>
+				<td th:text="${cambienInfo.Loaicambien}"></td>
+				<td><a class="label-for-sumit"
+					th:href="@{|/admin/cambien?code=${cambienInfo.Id_Cambien}|}">Xem
+						nhật ký</a></td>
+			</tr>
+			<tr>
+				<td colspan="6"><input type="submit" class="label-for-sumit"
+					th:href="@{|/admin/cambien|}" value="Quản lý cảm biến" /></td>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+	<div class="page-navigator" th:if="${paginationCambien.totalPages > 1}">
+		<th:block th:each="page : ${paginationCambien.navigationPages}">
+			<a
+				th:href="@{|/admin/CambienList?loaicambien=${loaicambien}&page=${page}|}"
+				th:if="${page != -1}" class="nav-item" th:utext="${page}"></a>
+			<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+		</th:block>
+	</div>
+
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div id="for_load_content"></div>
+		</div>
+	</div>
+	<script>
+	var ItemSelected = [[${id_Arduino}]];
+	
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	$('.label-for-sumit').click(function(event) {
+		modal.style.display = "block";
+		$('#for_load_content').load($(this).attr('href'));
+		return false;
+	});
+	$('.gotolink').click(function(event) {
+		window.location.href = $(this).attr('href');
+		return false;
+	});
+	span.onclick = function() {
+		modal.style.display = "none";
+		window.location.href = "/admin/cauhinh?subpagemode=2&ItemSelected=" + ItemSelected;
+	}
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+			window.location.href = "/admin/cauhinh?subpagemode=2&ItemSelected=" + ItemSelected;
+		}
+	}
+</script>
+</body>
+</html>

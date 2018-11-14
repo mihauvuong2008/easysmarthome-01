@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách nhiệm vụ</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+	<div class="task-container"
+		th:each="nhiemvu_thuongxuyenInfo : ${paginationNhiemvu_thuongxuyen.list}">
+		<table class="tasktable">
+			<tbody>
+				<tr>
+					<td>Id:</td>
+					<td th:utext="${nhiemvu_thuongxuyenInfo.Id_Nhiemvu_thuongxuyen}"></td>
+				</tr>
+				<tr>
+					<td>Nhiệm vụ:</td>
+					<td th:utext="${nhiemvu_thuongxuyenInfo.TenNhiemvuthuongxuyen}"></td>
+				</tr>
+				<tr>
+					<td>id Thiết bị:</td>
+					<td th:utext="${nhiemvu_thuongxuyenInfo.Id_Thietbi}"></td>
+				</tr>
+				<tr>
+					<td>Thiết bị:</td>
+					<td th:utext="${nhiemvu_thuongxuyenInfo.TenThietbi}"></td>
+				</tr>
+				<tr>
+					<td>Thời gian:</td>
+					<td th:utext="${nhiemvu_thuongxuyenInfo.Thoigian}"></td>
+				</tr>
+				<tr>
+					<td><a
+						th:href="@{|/admin/nhiemvuthuongxuyen?code=${nhiemvu_thuongxuyenInfo.Id_Nhiemvu_thuongxuyen}|}">Sửa</a>
+					</td>
+					<td><a style="color: red;"
+						th:href="@{|/admin/xoanhiemvuthuongxuyen?code=${nhiemvu_thuongxuyenInfo.Id_Nhiemvu_thuongxuyen}|}">Xóa</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<div class="page-navigator"
+		th:if="${paginationNhiemvu_thuongxuyen.totalPages > 1}">
+		<th:block
+			th:each="page : ${paginationNhiemvu_thuongxuyen.navigationPages}">
+
+			<a th:href="@{|/admin/danhsachnhiemvuthuongxuyen?page=${page}|}"
+				th:if="${page != -1}" class="nav-item" th:utext="${page}"></a>
+			<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+		</th:block>
+	</div>
+
+</body>

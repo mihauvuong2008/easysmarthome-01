@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách nhiệm vụ</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+	<table id="table">
+		<thead>
+			<tr>
+				<th>Id Nhiệm vụ</th>
+				<th>Tên thiết bị</th>
+				<th>Vị trí</th>
+				<th>Thời gian bắt đầu</th>
+				<th>Thời gian kết thúc</th>
+				<th>Đã thực hiện</th>
+				<th>Xóa</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="nhiemvuInfo : ${paginationNhiemvu.list}">
+				<td th:text="${nhiemvuInfo.Id_Nhiemvu}"></td>
+				<td th:text="${nhiemvuInfo.Tenthietbi}"></td>
+				<td th:text="${nhiemvuInfo.Vitri}"></td>
+				<td th:text="${nhiemvuInfo.Thoigianbatdau}"></td>
+				<td th:text="${nhiemvuInfo.Thoigianketthuc}"></td>
+				<td th:text="${nhiemvuInfo.Dathuchien}"></td>
+				<td><a
+					th:href="@{|/admin/xoanhiemvu?code=${nhiemvuInfo.Id_Nhiemvu}|}">Xóa
+				</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>

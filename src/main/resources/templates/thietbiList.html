@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách Thiết bị</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+
+	<div class="page-title">Quản lý Thiết bị</div>
+
+	<div class="lichsu-container">
+		<table id="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Tên thiết bị</th>
+					<!-- For Manager show thiết bị-->
+					<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+						<th>Vị trí</th>
+						<th>Lịch hoạt động</th>
+						<th>Thay đổi?</th>
+						<th>Xóa?</th>
+					</th:block>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="thietbiInfo : ${paginationThietbi.list}">
+					<td th:text="${thietbiInfo.Id_Thietbi}"></td>
+					<td><a
+						th:href="@{|/admin/thietbi?code=${thietbiInfo.Id_Thietbi}|}"
+						th:text="${thietbiInfo.Tenthietbi}"> </a></td>
+					<!-- For Manager show thiết bị-->
+					<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+						<td th:text="${thietbiInfo.Id_Vitri}"></td>
+						<td><a
+							th:href="@{|/admin/lichhoatdongthietbi?code=${thietbiInfo.Id_Thietbi}|}">Lịch
+								hoạt động</a></td>
+						<td><a
+							th:href="@{|/admin/thietbi?code=${thietbiInfo.Id_Thietbi}|}">Sửa</a>
+						</td>
+						<td><a style="color: red;"
+							th:href="@{|/admin/xoathietbi?code=${thietbiInfo.Id_Thietbi}|}">Xóa</a>
+						</td>
+					</th:block>
+				</tr>
+				<tr>
+					<td colspan="6"><a th:href="@{|/admin/thietbi|}">Thêm</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<div class="page-navigator" th:if="${paginationThietbi.totalPages > 1}">
+		<th:block th:each="page : ${paginationThietbi.navigationPages}">
+
+			<a th:href="@{|/admin/ThietbiList?page=${page}|}"
+				th:if="${page != -1}" class="nav-item" th:utext="${page}"></a>
+			<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+		</th:block>
+	</div>
+
+	<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>

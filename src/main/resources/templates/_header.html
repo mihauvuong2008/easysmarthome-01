@@ -1,0 +1,41 @@
+<meta charset="UTF-8">
+<div class="header-container" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<div class="site-name">Nhà Thông minh</div>
+	<div class="header-bar">
+		<th:block sec:authorize="isAuthenticated()">
+         Hello 
+			<a th:href="@{/admin/accountInfo}"
+				th:utext="${#request.userPrincipal.name}">..</a>
+         &nbsp;|&nbsp;
+         <a th:href="@{/admin/logout}">Logout</a>
+		</th:block>
+
+		<th:block sec:authorize="!isAuthenticated()">
+			<a th:href="@{/admin/login}">Login</a>
+		</th:block>
+	</div>
+
+</div>
+
+<script>
+	function startTime() {
+		var today = new Date();
+		var h = today.getHours();
+		var m = today.getMinutes();
+		var s = today.getSeconds();
+		m = checkTime(m);
+		s = checkTime(s);
+		document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+		var t = setTimeout(startTime, 500);
+	}
+
+	function checkTime(i) {
+		if (i < 10) {
+			i = "0" + i
+		}
+		; // add zero in front of numbers < 10
+		return i;
+	}
+</script>

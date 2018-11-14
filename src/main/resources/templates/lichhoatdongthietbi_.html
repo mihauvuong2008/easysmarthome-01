@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lịch hoạt động</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/clndr.css}">
+<!--Calender-->
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+<script th:src="@{/js/responsiveslides.min.js}"></script>
+<script th:src="@{/js/underscore-min.js}"></script>
+<script th:src="@{/js/moment-2.2.1.js}"></script>
+<script th:src="@{/js/clndr.js}"></script>
+<script th:src="@{/js/site.js}"></script>
+<!--End Calender-->
+
+<script type="application/javascript">
+	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<script th:inline="javascript">
+
+
+var modelAttr = [[${classParam}]];
+	$(document).ready(function() {
+// 		alert(modelAttr);
+		var x = document.getElementsByClassName(modelAttr);
+		$(x).addClass("dateSelected");
+	});
+	function startTime() {
+		var today = new Date();
+		var h = today.getHours();
+		var m = today.getMinutes();
+		var s = today.getSeconds();
+		m = checkTime(m);
+		s = checkTime(s);
+		document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+		var t = setTimeout(startTime, 500);
+	}
+
+	function checkTime(i) {
+		if (i < 10) {
+			i = "0" + i
+		}
+		; // add zero in front of numbers < 10
+		return i;
+	}
+</script>
+
+
+
+</head>
+<body onload="startTime()">
+
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+	<div class="page-title">Thời khóa biểu hoạt động</div>
+	<div class="demo-container">
+		<div id="topblock">
+			<div id="txt"></div>
+			<div class="dmy">
+				<script type="text/javascript">
+				var mydate = new Date()
+				var year = mydate.getYear()
+				if (year < 1000)
+					year += 1900
+				var day = mydate.getDay()
+				var month = mydate.getMonth()
+				var daym = mydate.getDate()
+				if (daym < 10)
+					daym = "0" + daym
+				var dayarray = new Array("Chủ nhật", "Thứ hai", "Thứ ba",
+						"Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy")
+				var montharray = new Array("tháng một", "tháng hai",
+						"tháng ba", "tháng tư", "tháng năm", "tháng sáu",
+						"tháng bảy", "tháng tám", "tháng chín", "tháng mười",
+						"tháng mười một", "tháng mười hai")
+				document.write("" + dayarray[day] + ", ngày "  + daym +", "+ montharray[month]
+						+  ", năm " + year + ", ")
+			</script>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="calender">
+				<div class="cal1">
+					<div class="clndr">
+						<table class="clndr-table">
+							<thead>
+								<tr class="header-days">
+									<td class="header-day">CN</td>
+									<td class="header-day">T2</td>
+									<td class="header-day">T3</td>
+									<td class="header-day">T4</td>
+									<td class="header-day">T5</td>
+									<td class="header-day">T6</td>
+									<td class="header-day">T7</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="day past calendar-day-2015-11-01">
+										<div class="day-contents">01</div>
+									</td>
+									<td class="day past calendar-day-2015-11-02">
+										<div class="day-contents">02</div>
+									</td>
+									<td class="day past calendar-day-2015-11-03">
+										<div class="day-contents">03</div>
+									</td>
+									<td class="day past calendar-day-2015-11-04">
+										<div class="day-contents">04</div>
+									</td>
+									<td class="day past calendar-day-2015-11-05">
+										<div class="day-contents">05</div>
+									</td>
+									<td class="day past calendar-day-2015-11-06">
+										<div class="day-contents">06</div>
+									</td>
+									<td class="day past calendar-day-2015-11-07">
+										<div class="day-contents">07</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="day past calendar-day-2015-11-08">
+										<div class="day-contents">08</div>
+									</td>
+									<td class="day past calendar-day-2015-11-09">
+										<div class="day-contents">09</div>
+									</td>
+									<td class="day past calendar-day-2015-11-10">
+										<div class="day-contents">10</div>
+									</td>
+									<td class="day past calendar-day-2015-11-11">
+										<div class="day-contents">11</div>
+									</td>
+									<td class="day past calendar-day-2015-11-12">
+										<div class="day-contents">12</div>
+									</td>
+									<td class="day past calendar-day-2015-11-13">
+										<div class="day-contents">13</div>
+									</td>
+									<td class="day past calendar-day-2015-11-14">
+										<div class="day-contents">14</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="day past calendar-day-2015-11-05">
+										<div class="day-contents">15</div>
+									</td>
+									<td class="day past calendar-day-2015-11-16">
+										<div class="day-contents">16</div>
+									</td>
+									<td class="day past calendar-day-2015-11-17">
+										<div class="day-contents">17</div>
+									</td>
+									<td class="day past calendar-day-2015-11-18">
+										<div class="day-contents">18</div>
+									</td>
+									<td class="day past calendar-day-2015-11-19">
+										<div class="day-contents">19</div>
+									</td>
+									<td class="day past calendar-day-2015-11-20">
+										<div class="day-contents">20</div>
+									</td>
+									<td class="day today calendar-day-2015-11-21">
+										<div class="day-contents">21</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="day calendar-day-2015-11-22">
+										<div class="day-contents">22</div>
+									</td>
+									<td class="day calendar-day-2015-11-23">
+										<div class="day-contents">23</div>
+									</td>
+									<td class="day calendar-day-2015-11-24">
+										<div class="day-contents">24</div>
+									</td>
+									<td class="day calendar-day-2015-11-25">
+										<div class="day-contents">25</div>
+									</td>
+									<td class="day calendar-day-2015-11-26">
+										<div class="day-contents">26</div>
+									</td>
+									<td class="day calendar-day-2015-11-27">
+										<div class="day-contents">27</div>
+									</td>
+									<td class="day calendar-day-2015-11-28">
+										<div class="day-contents">28</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td class="day calendar-day-2015-11-29">
+										<div class="day-contents">29</div>
+									</td>
+									<td class="day calendar-day-2015-11-30">
+										<div class="day-contents">30</div>
+									</td>
+									<td
+										class="day adjacent-month next-month calendar-day-2015-12-01">
+										<div class="day-contents">01</div>
+									</td>
+									<td
+										class="day adjacent-month next-month calendar-day-2015-12-02">
+										<div class="day-contents">02</div>
+									</td>
+									<td
+										class="day adjacent-month next-month calendar-day-2015-12-03">
+										<div class="day-contents">03</div>
+									</td>
+									<td
+										class="day adjacent-month next-month calendar-day-2015-12-04">
+										<div class="day-contents">04</div>
+									</td>
+									<td
+										class="day adjacent-month next-month calendar-day-2015-12-05">
+										<div class="day-contents">05</div>
+									</td>
+								</tr>
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="date">
+				<div id="dd1" class="wrapper-dropdown-3" tabindex="1">
+					<span><img th:src="@{/img/nav.png}" alt="Navbar" /> </span>
+					<ul class="dropdown">
+						<li><a th:href="@{/admin/ThietbiList}">Thêm Lịch tuần</a></li>
+						<li><a href="#">Xem lịch tuần này</a></li>
+						<li><a href="#">Nhắc tới điện thoại</a></li>
+						<li><a href="#">Ngừng tất cả hôm nay</a></li>
+					</ul>
+					<script type="text/javascript">
+					function DropDown(el) {
+						this.dd = el;
+						this.initEvents();
+					}
+					DropDown.prototype = {
+						initEvents : function() {
+							var obj = this;
+							obj.dd.on('click', function(event) {
+								$(this).toggleClass('active');
+								event.stopPropagation();
+							});
+						}
+					}
+					$(function() {
+						var dd = new DropDown($('#dd1'));
+						$(document).click(function() {
+							// all dropdowns
+							$('.wrapper-dropdown-3').removeClass('active');
+						});
+					});
+				</script>
+				</div>
+
+
+				<div class="lichhoatdong"
+					style="padding-top: 55px; padding-left: 15px; padding-right: 10px; font-size: 14px;">
+					<table id="table">
+						<tbody>
+							<tr>
+								<th colspan="4" th:text="${dateSelected}"></th>
+							</tr>
+							<tr
+								th:each="LichkhoidongthietbitrongngayInfo : ${paginationLichkhoidongthietbitrongngay.list}">
+								<!-- 					<td th:text="${vitriInfo.Vitri}"></td> -->
+								<td th:text="${LichkhoidongthietbitrongngayInfo.Thoigianbatdau}"></td>
+								<td
+									th:text="${LichkhoidongthietbitrongngayInfo.Thoigianketthuc}"></td>
+								<td th:text="${LichkhoidongthietbitrongngayInfo.Tenthietbi}"></td>
+								<td th:text="${LichkhoidongthietbitrongngayInfo.Vitri}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br />
+				<div class="page-navigator"
+					th:if="${paginationLichkhoidongthietbitrongngay.totalPages > 1}">
+					<th:block
+						th:each="page : ${paginationLichkhoidongthietbitrongngay.navigationPages}">
+
+						<a th:href="@{|/admin/Lichhoatdongthietbi?page=${page}|}"
+							th:if="${page != -1}" class="nav-item" th:utext="${page}"></a>
+						<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+					</th:block>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="clear"></div>
+	</div>
+	<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>

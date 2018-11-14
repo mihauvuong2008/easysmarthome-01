@@ -1,0 +1,427 @@
+html {
+	background: white;
+}
+
+h3 {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	/* 	display: inline-grid; */
+	max-width: 960px;
+	min-width: 360px;
+	margin: 0px auto;
+	background: #F8F8F8;
+	padding: 0px 5px;
+	/* 	text-align: center; */
+}
+
+.page-navigator {
+	text-align: center;
+}
+
+.page-title {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/* color: white; */
+	/* width: 300px; */
+	padding: 5px;
+	padding-left: 10px;
+	font-size: 110%;
+	/* text-align: left; */
+	margin-bottom: 5px;
+	background: #e6e6e6;
+	/* border-radius: 4px; */
+}
+
+.header-container {
+	text-align: left;
+	border-bottom: 1px solid #ccc;
+	position: relative;
+	background: #5f5f5f;
+	color: white;
+}
+
+.header-container .header-bar {
+	position: absolute;
+	right: 10px;
+	bottom: 20px;
+}
+
+.header-container .header-bar  a {
+	color: white;
+	font-size: bold;
+}
+
+.footer-container {
+	text-align: center;
+	margin-top: 10px;
+	padding: 10px 0px 10px 0px;
+	border-top: 1px solid #ccc;
+}
+
+.menu-container {
+	text-align: right;
+	/* margin: 12px 5px; */
+	padding: 12px 5px;
+	background: #eaeaea;
+}
+
+.menu-container a {
+	margin: 5px 5px 5px 10px;
+	color: #004d99;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.site-name {
+	font-size: 200%;
+	margin: 10px 10px 10px 0px;
+	padding: 5px;
+	margin-left: 10px;
+}
+
+.container {
+	margin: 5px 0px;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 20px;
+}
+
+.demo-container, .login-container, .account-container {
+	border: 1px solid #ccc;
+	text-align: left;
+	border-radius: 5px;
+	background-color: #f4f4f4;
+	padding: 20px;
+}
+
+.customer-info-container {
+	text-align: left;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 10px;
+}
+
+.task-container {
+	border: 1px solid #ccc;
+	width: 275px;
+	margin: 5px;
+	display: inline-block;
+	text-align: left;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 15px;
+}
+
+.product-image {
+	width: 120px;
+	height: 80px;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 5px;
+	margin: 5px;
+	line-height: 120%
+}
+
+.navi-item {
+	margin: 5px 5px 5px 20px;
+}
+
+.button-update-sc {
+	color: red;
+	margin: 5px 5px 5px 20px;
+}
+
+.button-send-sc {
+	color: red;
+	margin: 5px 5px 5px 20px;
+}
+
+.error-message {
+	font-size: 90%;
+	color: red;
+	font-style: italic;
+}
+
+.price {
+	color: blue;
+	font-weight: bold;
+}
+
+.subtotal {
+	color: red;
+	font-weight: bold;
+}
+
+.total {
+	color: red;
+	font-weight: bold;
+	font-size: 120%;
+}
+
+table td {
+	/* 	padding: 5px; */
+	
+}
+
+#table {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+
+#table td, #table th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#table tr:nth-child(odd) {
+	background-color: #f8f8f8;
+}
+
+#table tr:hover {
+	background-color: #ddd;
+}
+
+td label {
+	padding: 5px 15px 5px 0;
+}
+
+#table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+
+div#txt {
+	float: right;
+	font-size: 15px;
+	font-family: Petitinho;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	color: #4c7daf;
+	text-align: right;
+}
+
+.dateSelected {
+	background-color: rgb(251, 148, 148);
+	border: 1px solid #a05f62;
+}
+
+input[type=submit], [type=reset], [type=button]{
+	background-color: #4CAF50;
+	color: white;
+	padding: 6px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input[type=submit]:hover, [type=reset]:hover {
+	background-color: #4CAF50;
+	color: white;
+	padding: 6px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	background-color: #45a049;
+	color: white;
+}
+
+input[type=text], [type=password], select, [type=textarea] {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+	width: -webkit-fill-available
+}
+
+select {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: vertical;
+}
+
+.arduino {
+	float: left;
+	width: 37%;
+	margin-right: 10px;
+}
+
+.arduino ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	border-radius: 5px;
+}
+
+.arduino li {
+	border-radius: 5px;
+	background-color: #d2d2d2;
+	margin-bottom: 2px;
+}
+
+.arduino li a {
+	display: block;
+	color: #3c3c3c;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+/* Change the link color on hover */
+.arduino li a:hover {
+	background-color: #45a049;
+	color: white;
+}
+
+.arduino li.active {
+	background-color: #4CAF50;
+	color: white;
+	border-radius: 5px;
+}
+
+.arduino li.active a {
+	color: white;
+}
+
+.parentbox {
+	display: flex;
+}
+
+#loaded_content {
+	float: left;
+	width: 61.9%;
+}
+
+#fullloaded_content {
+	margin-top: 5px;
+	width: 100%;
+}
+
+img.icon {
+	width: 13px;
+	opacity: 0.5;
+}
+
+img.imgactive {
+	opacity: 1;
+}
+
+.arduinoManager {
+	margin-top: 15px;
+	display: grid;
+	grid-template-columns: auto;
+	grid-gap: 2px;
+	/* float: left; */
+	width: 100%;
+}
+
+.tool {
+	margin-bottom: 4px;
+}
+
+.arduinoBox {
+	display: grid;
+	grid-template-columns: 75% 6% 6% 6% 6%;
+	width: 100%;
+}
+
+.subtool {
+	margin: auto;
+	margin-left: 2px;
+}
+
+.leftmenu {
+	width: 27%;
+	margin-right: 10px;
+	position: relative;
+	float: left;
+}
+
+.leftmenu ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background-color: #dedede;
+}
+
+.leftmenu li a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+/* Change the link color on hover */
+.leftmenu li a:hover {
+	background-color: #555;
+	color: white;
+}
+
+.leftmenu li a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+#cambientable {
+	width: 71.5%;
+	float: left;
+}
+
+#rightPanel {
+	width: 71.5%;
+	float: left;
+}
+
+div.submit {
+	width: 100%;
+}
+
+.tasktable {
+	width: 100%;
+}
+
+#tableT2 td, th {
+	border: none;
+	padding: 0px;
+}
+#tableT3 td, th {
+	border: none;
+	padding: 0px;
+}
+#tableT4 td, th {
+	border: none;
+	padding: 0px;
+}
+#tableT5 td, th {
+	border: none;
+	padding: 0px;
+}
+#tableT6 td, th {
+	border: none;
+	padding: 0px;
+}
+#tableT7 td, th {
+	border: none;
+	padding: 0px;
+}
+#tableCN td, th {
+	border: none;
+	padding: 0px;
+}

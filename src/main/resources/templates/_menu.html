@@ -1,0 +1,22 @@
+<div class="menu-container" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<a th:href="@{/}">Home</a>
+	<th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+		|<a th:href="@{/admin/nhiemvuManager}"> Hẹn giờ, lập lịch </a>
+	</th:block>
+	<th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+		|<a th:href="@{/admin/cauhinh}"> Cài đặt bộ điều khiển </a>
+	</th:block>
+	<th:block sec:authorize="hasRole('ROLE_MANAGER')">
+		|<a th:href="@{/admin/ThietbiList}"> Thiết bị </a>
+	</th:block>
+	<th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+		 |<a th:href="@{/admin/VitriList}"> Vị trí</a>
+	</th:block>
+	<th:block sec:authorize="hasRole('ROLE_MANAGER')">
+		|<a th:href="@{/admin/CambienList}"> Cảm biến </a>
+	</th:block>
+	<th:block sec:authorize="hasRole('ROLE_MANAGER')">
+		|<a th:href="@{/admin/lichsucambien}"> Dữ liệu thu thập </a>
+	</th:block>
+</div>

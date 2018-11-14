@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách cảm biến</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+
+	<div class="page-title">Danh sách cảm biến</div>
+
+	<div class="product-preview-container"
+		th:each="cambienInfo : ${paginationCambien.list}">
+		<ul>
+			<li><img class="product-image"
+				th:src="@{|/cambienImage?loaicambien=${cambienInfo.Loaicambien}|}" />
+			</li>
+			<li>Id: <span th:utext="${cambienInfo.Id_Cambien}"></span></li>
+			<li>Trạng thái: <span th:utext="${cambienInfo.Trangthai}"></span></li>
+			<li>Loại cảm biến: <span th:utext="${cambienInfo.Loaicambien}"></span></li>
+			<li>Địa chỉ IP: <span th:utext="${cambienInfo.DiachiIP}"></span></li>
+			<!-- For Manager edit cambien -->
+			<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+				<li><a style="color: red;"
+					th:href="@{|/admin/cambien?code=${cambienInfo.Id_Cambien}|}">Edit
+						cambien</a></li>
+			</th:block>
+		</ul>
+	</div>
+
+	<br />
+	<div class="page-navigator" th:if="${paginationCambien.totalPages > 1}">
+		<th:block th:each="page : ${paginationCambien.navigationPages}">
+
+			<a th:href="@{|/admin/CambienList?page=${page}|}"
+				th:if="${page != -1}" class="nav-item" th:utext="${page}"></a>
+			<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+		</th:block>
+	</div>
+
+	<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Quản lý khu vực</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+
+	<div class="page-title">Quản lý khu vực</div>
+
+	<div class="lichsu-container">
+		<table id="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Vị trí</th>
+					<!-- For Manager show thiết bị-->
+					<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+						<th>Danh sách thiết bị</th>
+						<th>Danh sách cảm biến</th>
+						<th>Sửa</th>
+						<th>Xóa</th>
+					</th:block>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="vitriInfo : ${paginationVitri.list}">
+					<td th:text="${vitriInfo.Id_Vitri}"></td>
+					<td><a th:href="@{|/admin/vitri?code=${vitriInfo.Id_Vitri}|}"
+						th:text="${vitriInfo.Vitri}"></a></td>
+					<!-- For Manager show thiết bị-->
+					<th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+						<td><a
+							th:href="@{|/admin/ThietbiList?id_vitri=${vitriInfo.Id_Vitri}|}">Xem</a>
+						</td>
+						<td><a
+							th:href="@{|/admin/CambienList?id_vitri=${vitriInfo.Id_Vitri}|}">Xem</a>
+						</td>
+						<td><a th:href="@{|/admin/vitri?code=${vitriInfo.Id_Vitri}|}">
+								Sửa?</a></td>
+						<td><a style="color: red;"
+							th:href="@{|/admin/xoavitri?code=${vitriInfo.Id_Vitri}|}">
+								Xóa?</a></td>
+					</th:block>
+				</tr>
+				<tr>
+					<td colspan="6"><a th:href="@{|/admin/vitri|}">Thêm</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<div class="page-navigator" th:if="${paginationVitri.totalPages > 1}">
+		<th:block th:each="page : ${paginationVitri.navigationPages}">
+
+			<a th:href="@{|/admin/VitriList?page=${page}|}" th:if="${page != -1}"
+				class="nav-item" th:utext="${page}"></a>
+			<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+		</th:block>
+	</div>
+
+	<th:block th:include="/_footer"></th:block>
+
+</body>
+</html>

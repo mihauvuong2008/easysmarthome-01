@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Product</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}" charset="utf-8"></script>
+
+</head>
+<body>
+
+	<div class="page-title">Cấu hình</div>
+	<div class="demo-container">
+		<div th:if="${errorMessage!= null}" class="error-message"
+			th:utext="${errorMessage}"></div>
+
+		<table style="text-align: left;">
+			<tr>
+				<td>Thiết bị *</td>
+				<td><select id="thietbi">
+						<option th:each="thietbi : ${listThietbi}"
+							th:value="${thietbi.Id_Thietbi}" th:utext="${thietbi.Tenthietbi}" />
+				</select></td>
+			</tr>
+			<tr>
+				<td>Relay *</td>
+				<td><select id="relay">
+						<option th:each="relay : ${listRelay}"
+							th:value="${relay.Id_relay}" th:utext="${relay.Tenrelay}" />
+				</select></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" class="label-for-submit" value="Lưu" />
+					<input type="submit" class="label-for-cancel" value="Đóng" /></td>
+			</tr>
+		</table>
+	</div>
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div id="for_load_content"></div>
+		</div>
+	</div>
+<script th:inline="javascript">
+var ItemSelected = [[${id_Arduino}]];
+	$(document).ready(
+			function() {
+				// your on click function here
+				$('.label-for-submit').click(
+						function(event) {
+							var id_relay = $('#relay').val();
+							var id_Thietbi = $('#thietbi').val();
+							modal.style.display = "none";
+							modal.style.display = "block";
+							$('#for_load_content').load(
+									'/admin/relaysetupAdd?id_relay=' + id_relay
+											+ '&id_Thietbi=' + id_Thietbi);
+							return false;
+						});
+				$('.label-for-cancel').click(
+						function(event) {
+							modal.style.display = "none";
+							window.location.href = "/admin/cauhinh?openRelaylist=0&ItemSelected=" + ItemSelected;
+							return false;
+						});
+			});
+
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+		window.location.href = "/admin/cauhinh?openRelaylist=0&ItemSelected=" + ItemSelected;
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+			window.location.href = "/admin/cauhinh?openRelaylist=0&ItemSelected=" + ItemSelected;
+		}
+	}
+</script>
+</body>
+</html>

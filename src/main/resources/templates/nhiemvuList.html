@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+
+	<div class="page-title">Danh sách nhiệm vụ</div>
+	<div class="demo-container">
+		<label>Chọn ngày: </label> <input type="date" name="bday" id="myDate1" />
+		Đến <input type="date" name="bday" id="myDate2" /> <input
+			id="thuchien" type="checkbox">Chưa thực hiện <input
+			class="label-for-check" type="submit" value="Xem" />
+	</div>
+	<div id="fullloaded_content" style="width: 100%;"></div>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							document.getElementById("myDate1").valueAsDate = new Date();
+							document.getElementById("myDate2").valueAsDate = new Date();
+							$('.label-for-check')
+									.click(
+											function(event) {
+												lastLinkaccess = "/admin/nhiemvuData?dateFrom="
+														+ document
+																.getElementById("myDate1").value
+														+ "&dateTo="
+														+ document
+																.getElementById("myDate2").value
+														+ "&thuchien="
+														+ document
+																.getElementById("thuchien").checked
+												$('#fullloaded_content').load(
+														lastLinkaccess);
+												return false;
+											});
+						});
+	</script>
+</body>
+</html>

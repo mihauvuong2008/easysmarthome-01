@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách nhiệm vụ</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+
+	<div class="page-title">Quản lý nhiệm vụ</div>
+	<div class="parentbox">
+		<div class="leftmenu">
+			<ul>
+				<li value="2"><a class="label-for-check"
+					th:href="'/admin/nhiemvuList'">Xem lịch tuần</a></li>
+			</ul>
+			<ul>
+				<li value="3"><a class="label-for-check"
+					th:href="'/admin/nhiemvuList'">Xem lịch hẹn giờ</a></li>
+			</ul>
+		</div>
+		<div id="cambientable"></div>
+	</div>
+	<div id="fullloaded_content" style="width: 100%;"></div>
+
+	<th:block th:include="/_footer"></th:block>
+	
+	<script>
+	$(document).ready(function() {
+		// your on click function here
+		$('.label-for-check').click(function(event) {
+			lastLinkaccess = $(this).attr('href');
+			$('#cambientable').load(lastLinkaccess);
+			return false;
+		});
+		$('li > a').click(function() {
+		    $('a').removeClass();
+		    $(this).addClass('active');
+		});
+
+	});
+
+</script>
+</body>
+</html>

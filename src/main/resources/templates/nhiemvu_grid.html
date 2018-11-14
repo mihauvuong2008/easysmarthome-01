@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách nhiệm vụ</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+	<div class="task-container"
+		th:each="nhiemvuInfo : ${paginationNhiemvu.list}">
+		<table class="tasktable">
+			<tbody>
+				<tr>
+					<td>Id:</td>
+					<td th:utext="${nhiemvuInfo.Id_Nhiemvu}"></td>
+				</tr>
+				<tr>
+					<td>Tên thiết bị:</td>
+					<td th:utext="${nhiemvuInfo.Tenthietbi}"></td>
+				</tr>
+				<tr>
+					<td>Vị trí:</td>
+					<td th:utext="${nhiemvuInfo.Vitri}"></td>
+				</tr>
+				<tr>
+					<td>Bắt đầu:</td>
+					<td th:utext="${nhiemvuInfo.Thoigianbatdau}"></td>
+				</tr>
+				<tr>
+					<td>Kết thúc:</td>
+					<td th:utext="${nhiemvuInfo.Thoigianketthuc}"></td>
+				</tr>
+				<tr>
+					<td>Đã xong:</td>
+					<td th:utext="${nhiemvuInfo.Dathuchien}"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						th:href="@{|/admin/thuchienNhiemvu?code=${nhiemvuInfo.Id_Nhiemvu}|}"
+						value="Thực hiện!" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br />
+	<div class="page-navigator" th:if="${paginationNhiemvu.totalPages > 1}">
+		<th:block th:each="page : ${paginationNhiemvu.navigationPages}">
+
+			<a th:href="@{|/admin/nhiemvuList?page=${page}|}"
+				th:if="${page != -1}" class="nav-item" th:utext="${page}"></a>
+			<span class="nav-item" th:if="${page == -1}"> ... </span>
+
+		</th:block>
+	</div>
+
+</body>

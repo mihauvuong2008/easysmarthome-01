@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Cài đặt</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+
+</head>
+<body>
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+
+	<div class="page-title">Cấu hình</div>
+	<div class="parentbox">
+		<div class="arduino">
+			<!-- th:with="id_arduinoSelected thêm biến "-->
+			<ul th:if="${listArduino != null}">
+				<li th:each="Arduino : ${listArduino}" th:field="${Arduino}"
+					th:value="${Arduino.Id_Arduinocontroller}">
+					<div class="arduinoBox">
+						<a class="label-for-check"
+							th:utext="${Arduino.TenArduinocontroller + ' - '  + Arduino.DiachiIP}"
+							th:href="'/admin/relaysetup/?id_Arduino=' +  ${Arduino.Id_Arduinocontroller}"
+							aria-hidden='true'> </a>
+						<div class="subtool">
+							<img class="label-for-check  icon"
+								th:src="@{/img/cambienicon.png}"
+								th:href="'/admin/cambienList_arduino/?id_Arduino=' +  ${Arduino.Id_Arduinocontroller}" />
+						</div>
+						<div class="subtool">
+							<img class="label-for-check  icon" th:src="@{/img/relayicon.png}"
+								th:href="'/admin/relayList/?id_Arduino=' +  ${Arduino.Id_Arduinocontroller}" />
+						</div>
+						<div class="subtool">
+							<img class="label-for-sumit  icon" th:src="@{/img/editicon.png}"
+								th:href="'/admin/arduino/?id_Arduino=' +  ${Arduino.Id_Arduinocontroller}" />
+						</div>
+						<div class="subtool">
+							<img class="label-for-sumit  icon"
+								th:src="@{/img/removeicon.png}"
+								th:href="'/admin/xoaarduino/?code=' +  ${Arduino.Id_Arduinocontroller}" />
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="arduinoManager">
+				<div class="tool">
+					<input type="submit" class="label-for-sumit" style='width: 100%;'
+						th:href="@{|/admin/arduino|}" value="thêm bộ điều khiển" />
+				</div>
+			</div>
+		</div>
+		<div id="loaded_content"></div>
+	</div>
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div id="for_load_content"></div>
+		</div>
+	</div>
+	<br />
+	<th:block th:include="/_footer"></th:block>
+	<script>
+	var subpagemode = [[${subpagemode}]];
+	var ItemSelected = [[${ItemSelected}]];
+	var lastLinkaccess = "/admin/cauhinh?ItemSelected=" + ItemSelected;
+		$(document)
+				.ready(
+						function() {
+							// your on click function here
+							$('.label-for-check').click(function(event) {
+								lastLinkaccess = $(this).attr('href');
+								$('#loaded_content').load(lastLinkaccess);
+								return false;
+							});
+							$('li > div > a').click(function() {
+								$('li').removeClass();
+								$(this).parent().parent().addClass('active');
+							});
+							$('li > div > div > img').mouseover(function() {
+								$('img').removeClass('imgactive');
+								$(this).addClass('imgactive');
+							});
+
+							var x = $("li[value='" + ItemSelected + "']");
+							$(x).addClass('active');
+
+							if (subpagemode == 1) {
+								subpagemode = 0;
+								lastLinkaccess = '/admin/relayList/?id_Arduino='
+										+ ItemSelected;
+								$('#loaded_content').load(lastLinkaccess);
+							} else if (subpagemode == 2) {
+								subpagemode = 0;
+								lastLinkaccess = '/admin/cambienList_arduino/?id_Arduino='
+										+ ItemSelected;
+								$('#loaded_content').load(lastLinkaccess);
+							} else {
+								lastLinkaccess = $(x).children().children()
+										.attr('href');
+								$('#loaded_content').load(lastLinkaccess);
+							}
+
+						});
+
+		// Get the modal
+		var modal = document.getElementById('myModal');
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		// When the user clicks the button, open the modal 
+		$('.label-for-sumit').click(function(event) {
+			$('#for_load_content').load($(this).attr('href'));
+			modal.style.display = "block";
+			return false;
+		});
+		$('.gotolink').click(function(event) {
+			window.location.href = $(this).attr('href');
+			return false;
+		});
+		span.onclick = function() {
+			modal.style.display = "none";
+			location.reload();
+		}
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+				location.reload();
+			}
+		}
+	</script>
+</body>
+</html>

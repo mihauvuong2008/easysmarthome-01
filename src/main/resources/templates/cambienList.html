@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách cảm biến</title>
+<link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}">
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+</head>
+<body>
+	<th:block th:include="/_header"></th:block>
+	<th:block th:include="/_menu"></th:block>
+
+	<div class="page-title">Danh sách cảm biến</div>
+
+	<div class="parentbox">
+		<div class="leftmenu">
+			<ul>
+				<li value="1"><a class="label-for-check active"
+					th:href="'/admin/cambienList_table/?loaicambien=0'">Tất cả</a></li>
+			</ul>
+			<ul>
+				<li value="1"><a class="label-for-check"
+					th:href="'/admin/cambienList_table/?loaicambien=1'">Loại cảm
+						biến 1</a></li>
+			</ul>
+			<ul>
+				<li value="2"><a class="label-for-check"
+					th:href="'/admin/cambienList_table/?loaicambien=2'">Loại cảm
+						biến 2</a></li>
+			</ul>
+			<ul>
+				<li value="3"><a class="label-for-check"
+					th:href="'/admin/cambienList_table/?loaicambien=3'">Loại cảm
+						biến 3</a></li>
+			</ul>
+			<ul>
+				<li value="4"><a class="label-for-check"
+					th:href="'/admin/cambienList_table/?loaicambien=4'">Loại cảm
+						biến 4</a></li>
+			</ul>
+		</div>
+		<div id="cambientable"></div>
+	</div>
+	<th:block th:include="/_footer"></th:block>
+
+	<script>
+	var loaicambien = [[${loaicambien}]];
+	var page = [[${page}]];
+	$(document).ready(function() {
+		// your on click function here
+		$('.label-for-check').click(function(event) {
+			lastLinkaccess = $(this).attr('href');
+			$('#cambientable').load(lastLinkaccess);
+			return false;
+		});
+		$('li > a').click(function() {
+		    $('a').removeClass();
+		    $(this).addClass('active');
+		});
+
+		var x = $("li[value='" + loaicambien + "']");
+		if(x!=null){
+		    $('a').removeClass();}
+		$(x).children().addClass('active');
+		var lastLinkaccess = '/admin/cambienList_table/?loaicambien='+loaicambien+"&page="+page;
+		$('#cambientable').load(lastLinkaccess);
+	});
+
+</script>
+</body>
+</html>
